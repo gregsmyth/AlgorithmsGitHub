@@ -9,15 +9,15 @@
 
 
 
-def print_path(G,s,v,pi):
-    if v==s:
-        print s
+def print_path(G,startNode,v,pi):
+    if v==startNode:
+        print startNode
     elif len(pi) == 0:
         print "no path from", s ,"to", v ,"exists"
     else:
-        print_path(G,s,pi[v],pi)
+        print_path(G,startNode,pi[v],pi)
         print v
-    return (G,s,v)
+    return (G,v)
 
 
 def initialise_single_source(G_V):
@@ -26,7 +26,7 @@ def initialise_single_source(G_V):
     for v in G_V:
         d.append(float("inf"))
         pi.append(0)
-    d[s] = 0
+    d[startNode] = 0
     print "d",d
     return (d, pi)
 
@@ -50,7 +50,7 @@ def extract_min(Q, d):
     return Qmin    
 
 
-def dijkstra(G_V,Adj, weights, s):
+def dijkstra(G_V,Adj, weights, startNode):
     ## Initialisation
     (d, pi)=initialise_single_source(G_V)
     S = []
@@ -71,9 +71,9 @@ def dijkstra(G_V,Adj, weights, s):
 ##
 ##Runs Dijkstra and prints least cost path between s and v
 ##
-def dijkstraPaths(G_V,Adj, weights, s, v):
-    (S, pi) = dijkstra(G_V, Adj, weights, s)
-    print_path(G_V,s,v,pi)
+def dijkstraPaths(G_V,Adj, weights, startNode, v):
+    (S, pi) = dijkstra(G_V, Adj, weights, startNode)
+    print_path(G_V,startNode,v,pi)
     return()
     
 ################
@@ -107,13 +107,13 @@ for v in G_V:
 
 weights[0][1]=8
 weights[0][2]=5
-weights[0][3]=7
+weights[0][3]=9
 
-weights[1][4]=6
+weights[1][4]=7
 weights[2][4]=9
 weights[3][4]=4
 
-weights[4][1]=6
+weights[4][1]=7
 weights[4][2]=9
 weights[4][3]=4
 
